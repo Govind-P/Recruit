@@ -18,6 +18,8 @@ export default function Elevation() {
       <Box display="flex" justifyContent="space-between" alignItems="center" paddingTop="60px" >
       </Box>
       <Header />
+      <Box display="flex" justifyContent="space-between" alignItems="center" paddingTop="10px" >
+      </Box>
       <Search />
       <Box display="flex" justifyContent="space-between" alignItems="center" paddingTop="10px" >
       </Box>

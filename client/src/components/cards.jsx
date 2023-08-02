@@ -15,7 +15,7 @@ const CardLoop = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/details/data'); // Update the URL to your backend endpoint
+        const response = await fetch('http://localhost:8000/details/data?specialisation='+'Teacher'); // Update the URL to your backend endpoint
         if (response.ok) {
           const jsonData = await response.json();
           const formattedData = jsonData.data.map((item, index) => ({ ...item, id: index + 1 }));
