@@ -8,5 +8,19 @@ from django.views.decorators.csrf import csrf_exempt
 
 def data(request):
     specialisation = request.GET.get('specialisation')
-    data = people.objects.filter(specialisation=specialisation).values()
+    location = request.GET.get('location')
+    availability = request.GET.get('availability')
+    experience = request.GET.get('experience')
+
+    filters = {}
+    if specialisation:
+        filters['specialisation'] = specialisation
+    if location:
+        filters['location'] = location
+    if availability:
+        filters['availability'] = availability
+    if experience:
+        filters['experience'] = experience
+
+    data = people.objects.filter(**filters).values()
     return JsonResponse({'data': list(data)})

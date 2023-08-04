@@ -58,7 +58,10 @@ export default function Header() {
               margin: '20px',
             }}
           >
+            <Box>
             <Typography>Search by</Typography>
+            </Box>
+            
           </Box>
         </Box>
       </Grid>

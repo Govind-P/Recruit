@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { TextField, Button } from '@mui/material';
@@ -15,70 +15,123 @@ import { useTheme } from '@mui/material/styles';
 import * as yup from "yup";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-const type = [
+const experience= [
   {
-    value: 'table',
-    label: 'Table',
+    value: '0-5',
+    label: '0-5 years',
   },
   {
-    value: 'chair',
-    label: 'Chair',
+    value: '5-10',
+    label: '5-10 years',
   },
   {
-    value: 'dusk',
-    label: 'Dusk',
-  },
-  {
-    value: 'bench',
-    label: 'Bench',
+    value: '10',
+    label: 'above 10 years',
   },
 ];
-const madeof = [
+const specialisation= [
   {
-    value: 'wood',
-    label: 'Wood',
+    value: '1',
+    label: 'Data Analyst',
   },
   {
-    value: 'plastic',
-    label: 'Plastic',
+    value: '2',
+    label: 'Data Engineer',
   },
   {
-    value: 'metal',
-    label: 'Metal',
+    value: '3',
+    label: 'Data Scientist',
   },
   {
-    value: 'other',
-    label: 'Other',
+    value: '4',
+    label: 'Data Scientist',
+  },
+  {
+    value: '5',
+    label: 'Full stack Developer',
+  },
+  {
+    value: '6',
+    label: 'HR',
+  },
+  {
+    value: '7',
+    label: 'Block chain Developer',
+  },
+  {
+    value: '8',
+    label: 'Android Developer',
+  },
+  {
+    value: '9',
+    label: 'Ios Developer',
+  },
+  {
+    value: '10',
+    label: 'Cloud Engineer',
+  },
+  {
+    value: '11',
+    label: 'Software Engineer',
+  },
+  {
+    value: '12',
+    label: 'ML Engineer',
+  },
+  {
+    value: '13',
+    label: 'Frontend Developer',
+  },
+  {
+    value: '14',
+    label: 'Backend Developer',
+  },
+];
+const location= [
+  {
+    value: 'l1',
+    label: 'India',
+  },
+  {
+    value: 'l2',
+    label: 'USA',
+  },
+  {
+    value: 'l3',
+    label: 'Uk',
+  },
+  {
+    value: 'l4',
+    label: 'Canada',
+  },
+];
+const avaialbility = [
+  {
+    value: 'a1',
+    label: 'Full Time',
+  },
+  {
+    value: 'a2',
+    label: 'Part Time',
+  },
+  {
+    value: 'a3',
+    label: 'Intern',
   },
 ];
 
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
-const validationSchema = Yup.object({
-  chip: Yup.array().of(Yup.string()).required('Select at least one option'),
-  experience: Yup.string().required('Experience is required'),
-  location: Yup.string().required('Location is required'),
-  age: Yup.string().required('Age is required'),
-});
-const checkoutSchema = yup.object().shape({
-  fcode: yup.string().required("required"),
-  //ftype: yup.string().required("required"),
-  //madeof: yup.string().required("required"),
-  idate: yup.string().required("required"),
-  expense: yup.string().required("required"),
-});
+
 const initialValues = {
-furniturecode:"",
-furnituretype:"",
-furniturematerial:"",
-purchasedate:"",
-expense:"",
-status:"",
-invoice:"",
+location:"",
+experience:"",
+specialisation:"",
+availability:"",
 };
 
 
-export default function Search() {
+export default function Search( {values}) {
   const theme = useTheme();
   const { palette } = useTheme();
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -106,8 +159,6 @@ export default function Search() {
       {/* ROW 1 */}
       
       <Grid item xs={12} sm={12} md={12}>
-        
-         
           <Formik
         onSubmit={handleSubmit}
         initialValues={initialValues}
@@ -135,72 +186,72 @@ export default function Search() {
               }}
             >
               <TextField
-                id="filled-select-currency"
+                id="filled-select-spec"
                 select
-                label="Select"
+                label="Specialisation"
                 defaultValue=""
-                value={values.furniturematerial}
-                name="furniturematerial"
-                helperText="Please select furniture material"
+                value={values.specialisation}
+                name="specialisation"
+                helperText="Please select specialisation"
                 variant="outlined"
                 sx={{ gridColumn: "1" }}
                 onChange={handleChange}
               >
-                {madeof.map((option) => (
+                {specialisation.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))} 
               </TextField>
               <TextField
-                id="filled-select-currency"
+                id="filled-select-location"
                 select
-                label="Select "
-                defaultValue="table"
-                value={values.furnituretype}
-                name="furnituretype"
-                helperText="Please select furniture type"
+                label="Location"
+                defaultValue=""
+                value={values.location}
+                name="location"
+                helperText="Please select location"
                 variant="outlined"
                 sx={{ gridColumn: "2" }}
                 onChange={handleChange}
               >
-                {type.map((option) => (
+                {location.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}
               </TextField>
               <TextField
-                id="filled-select-currency"
+                id="filled-select-avail"
                 select
-                label="Select"
+                label="Available as"
                 defaultValue=""
-                value={values.furniturematerial}
-                name="furniturematerial"
-                helperText="Please select furniture material"
+                value={values.availability}
+                name="availability"
+                helperText="Please select employee type"
                 variant="outlined"
                 sx={{ gridColumn: "3" }}
                 onChange={handleChange}
               >
-                {madeof.map((option) => (
+                {avaialbility.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))} 
               </TextField>             
               <TextField
-                id="filled-select-currency"
+                id="filled-select-experience"
                 select
-                label="Select"
+                label="Experience"
                 defaultValue=""
-                value={values.furniturematerial}
-                name="furniturematerial"
-                helperText="Please select furniture material"
+                value={values.experience}
+                name="experience"
+                helperText="Please select Experience"
                 variant="outlined"
                 sx={{ gridColumn: "4" }}
                 onChange={handleChange}
               >
-                {madeof.map((option) => (
+                {experience.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
